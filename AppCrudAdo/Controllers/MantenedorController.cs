@@ -11,11 +11,31 @@ namespace AppCrudAdo.Controllers
     public class MantenedorController : Controller
     {
         ContactoDatos _ContactoDatos = new ContactoDatos();
-        // GET: Mantenedor
-        public ActionResult Listar()
+
+        public ActionResult Listar ()
         {
-            var oLista = _ContactoDatos.Listar();
-            return View(oLista);
+            var resultado = _ContactoDatos.Listar();
+            return View(resultado);
         }
+
+        public ActionResult Guardar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Guardar(Contacto oContacto)
+        {
+            var resultado = _ContactoDatos.Guardar(oContacto);
+
+            if(resultado)
+            {
+                return RedirectToAction("Listar");
+            } else
+            {
+                return View();
+            }
+        }
+
     }
 }

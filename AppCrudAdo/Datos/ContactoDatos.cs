@@ -10,9 +10,9 @@ namespace AppCrudAdo.Datos
 {
     public class ContactoDatos
     {
-        public List<Contacto> Listar ()
+        public List<Contacto> Listar()
         {
-            var olista = new List<Contacto> ();
+            var oLista = new List<Contacto>();
             var cn = new Conexion();
 
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
@@ -25,23 +25,24 @@ namespace AppCrudAdo.Datos
                 {
                     while (dr.Read())
                     {
-                        olista.Add(new Contacto()
+                        oLista.Add(new Contacto()
                         {
                             IdContacto = Convert.ToInt32(dr["IdContacto"]),
                             Nombre = dr["Nombre"].ToString(),
                             Telefono = dr["Telefono"].ToString(),
-                            Correo = dr["Correo"].ToString(),
+                            Correo = dr["Correo"].ToString()
                         });
                     }
                 }
             }
-            return olista;
+            return oLista;
         }
 
         public Contacto Obtener(int IdContacto)
         {
             var oContacto = new Contacto();
             var cn = new Conexion();
+
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
             {
                 conexion.Open();
@@ -63,6 +64,89 @@ namespace AppCrudAdo.Datos
             return oContacto;
         }
 
+        public bool Guardar(Contacto oContacto)
+        {
+            bool rpta;
+
+            try
+            {
+                var cn = new Conexion();
+
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("sp_Guardar", conexion);
+                    cmd.Parameters.AddWithValue("Nombre", oContacto.Nombre);
+                    cmd.Parameters.AddWithValue("Telefono", oContacto.Telefono);
+                    cmd.Parameters.AddWithValue("Correo", oContacto.Correo);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
+
+        public bool Editar(Contacto oContacto)
+        {
+            bool rpta;
+
+            try
+            {
+                var cn = new Conexion();
+
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("sp_Editar", conexion);
+                    cmd.Parameters.AddWithValue("IdContacto",oContacto.IdContacto);
+                    cmd.Parameters.AddWithValue("Nombre", oContacto.Nombre);
+                    cmd.Parameters.AddWithValue("Telefono", oContacto.Telefono);
+                    cmd.Parameters.AddWithValue("Correo", oContacto.Correo);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery ();
+                }
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
+
+        public bool Eliminar (int IdContacto)
+        {
+            bool rpta;
+
+            try
+            {
+                var cn = new Conexion();
+
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+                    SqlCommand cmd = new SqlCommand("sp_Eliminar", conexion);
+                    cmd.Parameters.AddWithValue("IdContacto", IdContacto);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception ex)
+            {
+                var error = ex.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
 
     }
 }

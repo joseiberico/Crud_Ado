@@ -1,0 +1,43 @@
+﻿@model AppCrudAdo.Models.Contacto
+@{
+    ViewBag.Title = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Crear Contacto
+    </div>
+
+
+    <div class="card-body">
+        <form asp-action="Guardar" asp-controller="Mantenedor" method="post">
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input name="Nombre" type="text" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Nombre)
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefono</label>
+                <input name="Telefono" type="text" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Telefono)
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Correo</label>
+                <input name="Correo" type="text" class="form-control" />
+                @Html.ValidationMessageFor(model => model.Correo)
+            </div>
+
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="@Url.Action("Listar", "Mantenedor")" class="btn btn-success">Cancelar</a>
+        </form>
+    </div>
+</div>
+
+<style>
+    .field-validation-error {
+        color: red;
+    }
+</style>
