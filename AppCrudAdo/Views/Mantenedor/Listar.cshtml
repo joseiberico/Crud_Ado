@@ -14,6 +14,7 @@
                 <th>Nombre</th>
                 <th>Teléfono</th>
                 <th>Email</th>
+                <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -24,6 +25,10 @@
                     <td>@contacto.Nombre</td>
                     <td>@contacto.Telefono</td>
                     <td>@contacto.Correo</td>
+                    <td>                     
+                            <a href="@Url.Action("Editar", "Mantenedor", new { IdContacto = @contacto.IdContacto })" class="btn btn-secondary">Editar Contacto</a>
+                            <a href="@Url.Action("Eliminar", "Mantenedor", new { IdContacto = @contacto.IdContacto })" class="btn btn-danger">Eliminar Contacto</a>
+                    </td>
                 </tr>
             }
         </tbody>

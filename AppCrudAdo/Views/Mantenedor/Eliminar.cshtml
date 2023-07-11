@@ -1,0 +1,39 @@
+﻿@model AppCrudAdo.Models.Contacto
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="card">
+    <div class="card-header">
+        Eliminar Contacto
+    </div>
+
+
+    <div class="card-body">
+        <form action="@Url.Action("Eliminar", "Mantenedor")" method="post">
+            <input name="IdContacto" type="text" readonly="readonly" value="@Model.IdContacto" class="form-control" />
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input name="Nombre" type="text" readonly="readonly" class="form-control" value="@Model.Nombre" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefono</label>
+                <input name="Telefono" type="text" readonly="readonly" class="form-control" value="@Model.Telefono" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Correo</label>
+                <input name="Correo" type="text" readonly="readonly" class="form-control" value="@Model.Correo" />
+            </div>
+
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+            <a href="@Url.Action("Listar", "Mantenedor")" class="btn btn-success">Cancelar</a>
+        </form>
+    </div>
+</div>
+

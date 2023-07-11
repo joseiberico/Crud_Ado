@@ -14,8 +14,8 @@ namespace AppCrudAdo.Datos
 
         public Conexion()
         {
-            string buider = "CadenaSQL";
-            CadenaSQL = ConfigurationManager.ConnectionStrings[buider].ConnectionString;
+            string builder = "CadenaSQL";
+            CadenaSQL = ConfigurationManager.ConnectionStrings[builder].ConnectionString;
         }
 
         public string getCadenaSQL()

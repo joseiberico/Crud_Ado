@@ -11,7 +11,7 @@
 
 
     <div class="card-body">
-        <form asp-action="Guardar" asp-controller="Mantenedor" method="post">
+        <form action="@Url.Action("Guardar", "Mantenedor")" method="post">
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
                 <input name="Nombre" type="text" class="form-control" />

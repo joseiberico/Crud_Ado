@@ -186,6 +186,8 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Mantenedor\Listar.cshtml" />
     <Content Include="Views\Mantenedor\Guardar.cshtml" />
+    <Content Include="Views\Mantenedor\Editar.cshtml" />
+    <Content Include="Views\Mantenedor\Eliminar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,7 @@ namespace AppCrudAdo.Datos
     {
         public List<Contacto> Listar()
         {
-            var oLista = new List<Contacto>();
+            var olista = new List<Contacto>();
             var cn = new Conexion();
 
             using (var conexion = new SqlConnection(cn.getCadenaSQL()))
@@ -25,7 +25,7 @@ namespace AppCrudAdo.Datos
                 {
                     while (dr.Read())
                     {
-                        oLista.Add(new Contacto()
+                        olista.Add(new Contacto()
                         {
                             IdContacto = Convert.ToInt32(dr["IdContacto"]),
                             Nombre = dr["Nombre"].ToString(),
@@ -35,10 +35,10 @@ namespace AppCrudAdo.Datos
                     }
                 }
             }
-            return oLista;
+            return olista;
         }
 
-        public Contacto Obtener(int IdContacto)
+        public Contacto Obtener (int IdContacto)
         {
             var oContacto = new Contacto();
             var cn = new Conexion();
@@ -71,7 +71,6 @@ namespace AppCrudAdo.Datos
             try
             {
                 var cn = new Conexion();
-
                 using (var conexion = new SqlConnection(cn.getCadenaSQL()))
                 {
                     conexion.Open();
@@ -84,7 +83,6 @@ namespace AppCrudAdo.Datos
                 }
                 rpta = true;
             }
-
             catch (Exception ex)
             {
                 var error = ex.Message;
@@ -105,12 +103,12 @@ namespace AppCrudAdo.Datos
                 {
                     conexion.Open();
                     SqlCommand cmd = new SqlCommand("sp_Editar", conexion);
-                    cmd.Parameters.AddWithValue("IdContacto",oContacto.IdContacto);
+                    cmd.Parameters.AddWithValue("IdContacto", oContacto.IdContacto);
                     cmd.Parameters.AddWithValue("Nombre", oContacto.Nombre);
                     cmd.Parameters.AddWithValue("Telefono", oContacto.Telefono);
                     cmd.Parameters.AddWithValue("Correo", oContacto.Correo);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery ();
+                    cmd.CommandType= CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
                 }
                 rpta = true;
             }
@@ -122,7 +120,7 @@ namespace AppCrudAdo.Datos
             return rpta;
         }
 
-        public bool Eliminar (int IdContacto)
+        public bool Eliminar(int IdContacto)
         {
             bool rpta;
 
@@ -147,6 +145,5 @@ namespace AppCrudAdo.Datos
             }
             return rpta;
         }
-
     }
 }

@@ -37,5 +37,48 @@ namespace AppCrudAdo.Controllers
             }
         }
 
+        public ActionResult Editar(int IdContacto)
+        {
+            var oContacto = _ContactoDatos.Obtener(IdContacto);
+            return View(oContacto);
+        }
+        [HttpPost]
+        public ActionResult Editar(Contacto oContacto)
+        {
+            var resultado = _ContactoDatos.Editar(oContacto);
+
+            if (resultado)
+            {
+                return RedirectToAction("Listar");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+        public ActionResult Eliminar(int IdContacto)
+        {
+            var oContacto = _ContactoDatos.Obtener(IdContacto);
+            return View(oContacto);
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar(Contacto oContacto)
+        {
+            var resultado = _ContactoDatos.Eliminar(oContacto.IdContacto);
+            if (resultado)
+            {
+                return RedirectToAction("Listar");
+            }
+            else
+            {
+                return View();
+            }
+        }
+
+
+
+
     }
 }
